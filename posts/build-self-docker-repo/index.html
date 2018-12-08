@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>无法访问gcr.io怎么办?搭建自己的镜像库</title>
+	<link rel="stylesheet" href="/css/style.min.bde2f5cd3b77a52d8db26f638dfed4b52085d3ea252fdf5746658b9883382220.css" integrity="sha256-veL1zTt3pS2Nsm9jjf7UtSCF0+olL99XRmWLmIM4IiA=">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="http://localhost:1313/">YorkYu&#39;s Blog</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					<a href="/posts/">Posts</a>
+					<a href="/about-me/">About</a>
+				</nav>
+			</div>
+			<div class="hdr-right">
+				<div class="hdr-icons">
+					<span class="hide-in-mobile"><a href="https://twitter.com/" target="_blank" rel="noopener"><span class="screen-reader-text">twitter</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://github.com/" target="_blank" rel="noopener"><span class="screen-reader-text">github</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://linkedin.com/" target="_blank" rel="noopener"><span class="screen-reader-text">linkedin</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></span>
+					<button id="menu-btn" class="hdr-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast" style="display: none;">
+		<ul>
+			<li><a href="/posts/">Posts</a></li>
+			<li><a href="/about-me/">About</a></li>
+		</ul>
+	</div>
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jul 25, 2018</span></div>
+				<h1>无法访问gcr.io怎么办?搭建自己的镜像库</h1>
+			</header>
+			<div class="content">
+				
+
+<p>由于在国内无法访问gcr.io域名，安装kubernetes时很容易被镜像无法下载而安装受阻，本文介绍使用docker hub和github来自动构建镜像的方法来使用gcr.io的相关镜像。</p>
+
+<h1 id="账号准备">账号准备</h1>
+
+<ul>
+<li>github账号，用来存放镜像Dockerfile文件。</li>
+<li>docker hub账号，用来build镜像。</li>
+<li>阿里云账号，用来创建镜像仓库，上传镜像。</li>
+</ul>
+
+<h1 id="创建github仓库">创建github仓库</h1>
+
+<p>创建github代码仓库googlecontainer，下载后上传各个镜像的Dockerfile，如kube-apiserver的Dockerfile如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> k8s.gcr.io/kube-apiserver-amd64:v1.11.1</span><span class="err">
+</span><span class="err"></span>MAINTAINTER yourname@email.com</code></pre></div>
+<p>编辑好后提交代码。</p>
+
+<h1 id="创建docker镜像">创建docker镜像</h1>
+
+<p>登录docker hub官网，点击 <code>create automated build</code>菜单，创建构建镜像。创建之前需要绑定github账号。</p>
+
+<p>创建镜像名称，进入<code>Build Setting</code>stab页面，点击<code>Trigger</code>按钮，保存变更。</p>
+
+<p>进入<code>Build Details</code>tab页面查看构建进度，一开始会加入构建队列，几分钟后就会构建完成，就可以拉取镜像了。</p>
+
+<h1 id="创建阿里云镜像仓库">创建阿里云镜像仓库</h1>
+
+<p>登录阿里云账号，创建镜像仓库后就可以上传了。一下脚本是拉取docker.io上构建好的镜像，修改景象名称，然后上传到阿里云镜像仓库，以后就可以从阿里云镜像仓库上下载了，速度快了很多。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Pull Kubernetes 1.11.1 Images from docker.io ......&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+
+<span class="nv">FROM_REGISTRY</span><span class="o">=</span>docker.io/rainfish
+<span class="nv">TO_REGISTRY</span><span class="o">=</span>registry.cn-hangzhou.aliyuncs.com/junchen
+<span class="nv">GOOGLE_REGISTRY</span><span class="o">=</span>k8s.gcr.io
+
+<span class="c1">## 拉取镜像</span>
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-apiserver-amd64:v1.11.1
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-controller-manager-amd64:v1.11.1
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-scheduler-amd64:v1.11.1
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-proxy-amd64:v1.11.1
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/etcd-amd64:3.2.18
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/pause-amd64:3.1
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/coredns:1.1.3
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTEY</span><span class="si">}</span>/kubernetes-dashboard-amd64:v1.8.3
+
+<span class="c1">## 添加官方tag</span>
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-apiserver-amd64:v1.11.1 <span class="si">${</span><span class="nv">GOOGLE_REGISTRY</span><span class="si">}</span>/kube-apiserver-amd64:v1.11.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-scheduler-amd64:v1.11.1 <span class="si">${</span><span class="nv">GOOGLE_REGISTRY</span><span class="si">}</span>/kube-scheduler-amd64:v1.11.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-controller-manager-amd64:v1.11.1 <span class="si">${</span><span class="nv">GOOGLE_REGISTRY</span><span class="si">}</span>/kube-controller-manager-amd64:v1.11.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-proxy-amd64:v1.11.1 <span class="si">${</span><span class="nv">GOOGLE_REGISTRY</span><span class="si">}</span>/kube-proxy-amd64:v1.11.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/etcd-amd64:3.2.18 <span class="si">${</span><span class="nv">GOOGLE_REGISTRY</span><span class="si">}</span>/etcd-amd64:3.2.18
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/pause-amd64:3.1 <span class="si">${</span><span class="nv">GOOGLE_REGISTRY</span><span class="si">}</span>/pause-amd64:3.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/coredns:1.1.3 <span class="si">${</span><span class="nv">GOOGLE_REGISTRY</span><span class="si">}</span>/coredns:1.1.3
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kubernetes-dashboard-amd64:v1.8.3 <span class="si">${</span><span class="nv">GOOGLE_REGISTRY</span><span class="si">}</span>/kubernetes-dashboard-amd64:v1.8.3
+
+
+<span class="c1">## 添加tag</span>
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-apiserver-amd64:v1.11.1 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-apiserver-amd64:v1.11.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-scheduler-amd64:v1.11.1 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-scheduler-amd64:v1.11.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-controller-manager-amd64:v1.11.1 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-controller-manager-amd64:v1.11.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kube-proxy-amd64:v1.11.1 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-proxy-amd64:v1.11.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/etcd-amd64:3.2.18 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/etcd-amd64:3.2.18
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/pause-amd64:3.1 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/pause-amd64:3.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/coredns:1.1.3 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/coredns:1.1.3
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/kubernetes-dashboard-amd64:v1.8.3 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kubernetes-dashboard-amd64:v1.8.3
+
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Pull Kubernetes 1.11.1 Images FINISHED.&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+
+<span class="c1">## 上传镜像</span>
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Push Kubernetes 1.11.0 Images to </span><span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span><span class="s2">.&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-apiserver-amd64:v1.11.1
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-scheduler-amd64:v1.11.1
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-controller-manager-amd64:v1.11.1
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-proxy-amd64:v1.11.1
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/etcd-amd64:3.2.18
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/pause-amd64:3.1
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/coredns:1.1.3
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kubernetes-dashboard-amd64:v1.8.3
+
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Push Kubernetes 1.11.1 Images FINISHED.&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span></code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://localhost:1313/tags/docker">Docker</a></span><span class="tag"><a href="http://localhost:1313/tags/kubernetes">kubernetes</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>716 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2018-07-26 07:48 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="http://localhost:1313/posts/kubeadm-install/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>国内环境安装kubeadm</span>
+			</a>
+		</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2018 <a href="http://localhost:1313/">YorkYu（于耀畯）</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="http://localhost:1313/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
+	</footer>
+	<script>let haveHeader = true;</script>
+
+	<script src="/js/main.min.00689ba18bbf9422fda222b02b555f01d54bfbb9b6d02f9bcffad67bdb2ff2cd.js" integrity="sha256-AGiboYu/lCL9oiKwK1VfAdVL+7m20C+bz/rWe9sv8s0="></script>
+	
+<script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10"></' + 'script>')</script></body>
+
+</html>

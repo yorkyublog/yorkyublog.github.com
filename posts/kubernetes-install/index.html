@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>kubernete集群搭建与安装部署(v1.11.0)</title>
+	<link rel="stylesheet" href="/css/style.min.bde2f5cd3b77a52d8db26f638dfed4b52085d3ea252fdf5746658b9883382220.css" integrity="sha256-veL1zTt3pS2Nsm9jjf7UtSCF0+olL99XRmWLmIM4IiA=">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="http://localhost:1313/">YorkYu&#39;s Blog</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					<a href="/posts/">Posts</a>
+					<a href="/about-me/">About</a>
+				</nav>
+			</div>
+			<div class="hdr-right">
+				<div class="hdr-icons">
+					<span class="hide-in-mobile"><a href="https://twitter.com/" target="_blank" rel="noopener"><span class="screen-reader-text">twitter</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://github.com/" target="_blank" rel="noopener"><span class="screen-reader-text">github</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://linkedin.com/" target="_blank" rel="noopener"><span class="screen-reader-text">linkedin</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></span>
+					<button id="menu-btn" class="hdr-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast" style="display: none;">
+		<ul>
+			<li><a href="/posts/">Posts</a></li>
+			<li><a href="/about-me/">About</a></li>
+		</ul>
+	</div>
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jul 24, 2018</span></div>
+				<h1>kubernete集群搭建与安装部署(v1.11.0)</h1>
+			</header>
+			<div class="content">
+				
+
+<blockquote>
+<p>全手工从0到1搭建一个kubernete集群，使用版本v1.11.0完成</p>
+</blockquote>
+
+<h1 id="项目介绍">项目介绍</h1>
+
+<p>该文档描述了全手工从0到1搭建一个kubernete集群，使用版本v1.11.0完成。</p>
+
+<h1 id="软件架构">软件架构</h1>
+
+<p>软件架构说明</p>
+
+<h1 id="安装教程">安装教程</h1>
+
+<h2 id="动手之前">动手之前</h2>
+
+<ul>
+<li>构建自己的私有镜像仓库</li>
+<li>准备机器和设置网络</li>
+<li>设置免密登录</li>
+<li>关闭防火墙和SELinux</li>
+<li>下载安装最新docker引擎</li>
+<li>设定系统相关参数</li>
+<li>下载安装kubectl，kubelet，cni plugin，cfssl工具</li>
+</ul>
+
+<h3 id="构建自己的私有镜像仓库">构建自己的私有镜像仓库</h3>
+
+<p>由于网络无法访问k8s.gcr.io,gcr.io等镜像仓库原因，首先需要将k8s安装需要的镜像拉取过来，可以使用国内阿里云镜像，登录阿里云控制台搜索镜像，一般都能找到想要的镜像。登录阿里云创建自己的镜像仓库，并拉取开源镜像后上传。</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">docker login --username<span class="o">={</span>YOUR_NAME<span class="o">}</span> registry.cn-hangzhou.aliyuncs.com</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># k8s-1.11.x/scripts/aliyun-push-kubeimages-1.11.0.sh</span>
+<span class="nv">FROM_REGISTRY</span><span class="o">=</span>registry.cn-hangzhou.aliyuncs.com/openthings
+<span class="nv">TO_REGISTRY</span><span class="o">=</span>registry.cn-hangzhou.aliyuncs.com/junchen
+
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Pull Kubernetes 1.11.0 Images from aliyuncs.com ......&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+
+<span class="c1">## 拉取镜像</span>
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-kube-apiserver-amd64:v1.11.0
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-kube-controller-manager-amd64:v1.11.0
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-kube-scheduler-amd64:v1.11.0
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-kube-proxy-amd64:v1.11.0
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-etcd-amd64:3.2.18
+docker pull <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-pause-amd64:3.1
+docker pull docker.io/googlecontainer/defaultbackend-amd64:1.4
+docker pull registry.cn-hangzhou.aliyuncs.com/kube_containers/kubernetes-dashboard-amd64:v1.8.3
+docker pull registry.cn-hangzhou.aliyuncs.com/mirrorgoogle/nginx-ingress-controller:0.16.2
+
+<span class="c1">## 添加Tag</span>
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-kube-apiserver-amd64:v1.11.0 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-apiserver-amd64:v1.11.0
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-kube-scheduler-amd64:v1.11.0 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-scheduler-amd64:v1.11.0
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-kube-controller-manager-amd64:v1.11.0 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-controller-manager-amd64:v1.11.0
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-kube-proxy-amd64:v1.11.0 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-proxy-amd64:v1.11.0
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-etcd-amd64:3.2.18 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/etcd-amd64:3.2.18
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-pause-amd64:3.1 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/pause-amd64:3.1
+docker tag <span class="si">${</span><span class="nv">FROM_REGISTRY</span><span class="si">}</span>/k8s-gcr-io-coredns:1.1.3 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/coredns:1.1.3
+docker tag docker.io/googlecontainer/defaultbackend-amd64:1.4 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/defaultbackend:1.4
+docker tag registry.cn-hangzhou.aliyuncs.com/kube_containers/kubernetes-dashboard-amd64:v1.8.3 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kubernetes-dashboard-amd64:v1.8.3
+docker tag registry.cn-hangzhou.aliyuncs.com/mirrorgoogle/nginx-ingress-controller:0.16.2 <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/nginx-ingress-controller:0.16.2
+
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Pull Kubernetes 1.11.0 Images FINISHED.&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;into registry.cn-hangzhou.aliyuncs.com/openthings, &#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;           by openthings@https://my.oschina.net/u/2306127.&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+
+<span class="c1">## 上传镜像</span>
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Push Kubernetes 1.11.0 Images to </span><span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span><span class="s2">.&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-apiserver-amd64:v1.11.0
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-scheduler-amd64:v1.11.0
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-controller-manager-amd64:v1.11.0
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kube-proxy-amd64:v1.11.0
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/etcd-amd64:3.2.18
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/pause-amd64:3.1
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/coredns:1.1.3
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/defaultbackend:1.4
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/kubernetes-dashboard-amd64:v1.8.3
+docker push <span class="si">${</span><span class="nv">TO_REGISTRY</span><span class="si">}</span>/nginx-ingress-controller:0.16.2
+<span class="nb">echo</span> <span class="s2">&#34;&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;Push Kubernetes 1.11.0 Images FINISHED.&#34;</span>
+<span class="nb">echo</span> <span class="s2">&#34;==========================================================&#34;</span></code></pre></div>
+<h3 id="准备机器和网络">准备机器和网络</h3>
+
+<p>kubernetes部署版本信息：</p>
+
+<ul>
+<li>Kubernetes: v1.11.0</li>
+<li>CNI: v0.7.1</li>
+<li>Etcd: v3.3.8</li>
+<li>Docker: v18.06.0-ce</li>
+<li>Calico: v3.1</li>
+</ul>
+
+<p>Kubernetes 部署的網路資訊：</p>
+
+<ul>
+<li><strong>Cluster IP CIDR</strong>: 10.244.0.0/16</li>
+<li><strong>Service Cluster IP CIDR</strong>: 10.96.0.0/12</li>
+<li><strong>Service DNS IP</strong>: 10.96.0.10</li>
+<li><strong>DNS DN</strong>: cluster.local</li>
+<li><strong>Kubernetes API VIP</strong>: 192.168.1.9</li>
+<li><strong>Kubernetes Ingress VIP</strong>: 192.168.1.8</li>
+</ul>
+
+<p>部署节点信息如下表：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">IP Address</th>
+<th align="center">Host Name</th>
+<th align="center">CPU</th>
+<th align="center">Mem</th>
+<th align="center">DISK</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">192.168.1.10<br />192.168.1.9</td>
+<td align="center">k8s-m1</td>
+<td align="center">2</td>
+<td align="center">4G</td>
+<td align="center">10G</td>
+<td align="center">master节点1</td>
+</tr>
+
+<tr>
+<td align="center">192.168.1.11<br />192.168.1.9</td>
+<td align="center">k8s-m2</td>
+<td align="center">2</td>
+<td align="center">4G</td>
+<td align="center">10G</td>
+<td align="center">master节点2</td>
+</tr>
+
+<tr>
+<td align="center">192.168.1.12<br />192.168.1.9</td>
+<td align="center">k8s-m3</td>
+<td align="center">2</td>
+<td align="center">4G</td>
+<td align="center">10G</td>
+<td align="center">master节点3</td>
+</tr>
+
+<tr>
+<td align="center">192.168.1.20</td>
+<td align="center">k8s-n1</td>
+<td align="center">2</td>
+<td align="center">4G</td>
+<td align="center">10G</td>
+<td align="center">node节点1</td>
+</tr>
+
+<tr>
+<td align="center">192.168.1.21</td>
+<td align="center">k8s-n2</td>
+<td align="center">2</td>
+<td align="center">4G</td>
+<td align="center">10G</td>
+<td align="center">node节点2</td>
+</tr>
+
+<tr>
+<td align="center">192.168.1.22</td>
+<td align="center">k8s-n3</td>
+<td align="center">2</td>
+<td align="center">4G</td>
+<td align="center">10G</td>
+<td align="center">node节点3</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="设置免密登录">设置免密登录</h3>
+
+<p>在所有节点上设置hosts，使用节点名能访问到机器。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ vi /etc/hosts
+<span class="m">192</span>.168.1.10 k8s-m1
+<span class="m">192</span>.168.1.11 k8s-m2
+<span class="m">192</span>.168.1.12 k8s-m3
+<span class="m">192</span>.168.1.20 k8s-n1
+<span class="m">192</span>.168.1.21 k8s-n2
+<span class="m">192</span>.168.1.22 k8s-n3</code></pre></div>
+<p>在所有节点上修改hostname</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ hostnamectl --static set-hostname k8s-*</code></pre></div>
+<p>在<code>k8s-m1</code>节点上运行如下脚本，设置免密登录到其他所有机器。</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">ssh-keygen -t rsa
+<span class="k">for</span> NODE in k8s-m1 k8s-m2 k8s-m3 k8s-n1 k8s-n2 k8s-n3<span class="p">;</span> <span class="k">do</span>
+    ssh-copy-id -i ~/.ssh/id_rsa.pub root@<span class="si">${</span><span class="nv">NODE</span><span class="si">}</span>
+<span class="k">done</span></code></pre></div>
+<p>执行如下命令验证是否可以免密登录。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ ssh root@k8s-m2</code></pre></div>
+<h3 id="关闭防火墙和selinux">关闭防火墙和SELinux</h3>
+
+<ul>
+<li>确认所有节点防火墙和SELinux已关闭</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ systemctl stop firewalld <span class="o">&amp;&amp;</span> systemctl disable firewalld
+$ setenforce <span class="m">0</span>
+$ vi /etc/selinux/config
+<span class="nv">SELINUX</span><span class="o">=</span>disabled</code></pre></div>
+<h3 id="下载安装最新docker引擎">下载安装最新docker引擎</h3>
+
+<ul>
+<li>确认所有节点安装最新版的docker ce版本引擎并启动</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ curl -fsSL https://get.docker.com/ <span class="p">|</span> sh
+$ systemctl <span class="nb">enable</span> docker <span class="o">&amp;&amp;</span> systemctl start docker</code></pre></div>
+<h3 id="设定系统相关参数">设定系统相关参数</h3>
+
+<ul>
+<li><code>所有节点</code>启用网络参数：<code>net.ipv4.ip_forward</code> <code>net.bridge.bridge-nf-call-ip6tables</code> <code>net.bridge.bridge-nf-call-iptables</code>。关于<code>bridge-nf-call-iptables</code>的启用取决于是否将容器连接到<code>Linux bridge</code>或使用其他一些机制(如 SDN vSwitch)。</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ cat <span class="s">&lt;&lt;EOF | tee /etc/sysctl.d/k8s.conf
+</span><span class="s">net.ipv4.ip_forward = 1
+</span><span class="s">net.bridge.bridge-nf-call-ip6tables = 1
+</span><span class="s">net.bridge.bridge-nf-call-iptables = 1
+</span><span class="s">EOF</span>
+
+$ sysctl -p /etc/sysctl.d/k8s.conf</code></pre></div>
+<ul>
+<li>基于性能考虑，Kubernetes v1.8+ 要求关闭系统 Swap，請在<code>所有节点</code>利用以下指令关闭：</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ swapoff -a <span class="o">&amp;&amp;</span> sysctl -w vm.swappiness<span class="o">=</span><span class="m">0</span>
+$ sed <span class="s1">&#39;/swap.img/d&#39;</span> -i /etc/fstab <span class="c1"># 不同机器会有差别，或者</span>
+$ sed -i <span class="s1">&#39;s/\(^.*centos-swap swap.*$\)/#\1/&#39;</span> /etc/fstab</code></pre></div>
+<h3 id="下载安装kubectl-kubelet-cni-plugin-cfssl工具">下载安装kubectl，kubelet，cni plugin，cfssl工具</h3>
+
+<ul>
+<li>在<code>所有节点</code>下载安装kubelet</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">export</span> <span class="nv">KUBE_URL</span><span class="o">=</span>https://storage.googleapis.com/kubernetes-release/release/v1.11.0/bin/linux/amd64
+$ wget <span class="si">${</span><span class="nv">KUBE_URL</span><span class="si">}</span>/kubelet -O /usr/local/bin/kubelet
+$ chmod +x /usr/local/bin/kubelet</code></pre></div>
+<ul>
+<li>在<code>所有master节点</code>下载安装kubectl</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ wget <span class="si">${</span><span class="nv">KUBE_URL</span><span class="si">}</span>/kubectl -O /usr/local/bin/kubectl
+$ chmod +x /usr/local/bin/kubectl</code></pre></div>
+<ul>
+<li>在所有节点下载安装cni plugin</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">export</span> <span class="nv">CNI_URL</span><span class="o">=</span>https://github.com/containernetworking/plugins/releases/download
+$ mkdir -p /opt/cni/bin <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /opt/cni/bin
+$ wget <span class="s2">&#34;</span><span class="si">${</span><span class="nv">CNI_URL</span><span class="si">}</span><span class="s2">/v0.7.1/cni-plugins-amd64-v0.7.1.tgz&#34;</span> <span class="p">|</span> tar -zxfv</code></pre></div>
+<ul>
+<li>在k8s-m1节点下载安装cfss工具，用于生成各种证书</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">export</span> <span class="nv">CFSSL_URL</span><span class="o">=</span>https://pkg.cfssl.org/R1.2
+$ wget <span class="si">${</span><span class="nv">CFSSL_URL</span><span class="si">}</span>/cfssl_linux-amd64 -O /usr/local/bin/cfssl
+$ wget <span class="si">${</span><span class="nv">CFSSL_URL</span><span class="si">}</span>/cfssljson_linux-amd64 -O /usr/local/bin/cfssljson
+$ chmod +x /usr/local/bin/cfssl /usr/local/bin/cfssljson</code></pre></div>
+<h2 id="设置tls认证-建立ca并生成tls证书">设置TLS认证，建立CA并生成TLS证书</h2>
+
+<p>Kubernete节点中etcd，apiserver，kubelet等之间采用安全认证通信，将需要生成自签署的安全证书用于认证。生成凭证使用cfssl工具，各证书配置文档可以从git中拉取，JSON配置文件都放在pki文件夹下。各节点需要的证书如下表所示：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">CA&amp;Key</th>
+<th align="center">etcd</th>
+<th align="center">kube-apiserver</th>
+<th align="center">kube-proxy</th>
+<th align="center">kubelet</th>
+<th align="center">kubectl</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">ca.pem</td>
+<td align="center">√</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">ca-key.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">etcd.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">etcd-key.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">kubernetes.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">kubernetes-key.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">kube-proxy.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">kube-proxy-key.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">admin.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">admin-key.pem</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ git clone https://github.com/kairen/k8s-manual-files.git ~/k8s-manual-files
+$ <span class="nb">cd</span> ~/k8s-manual-files/pki</code></pre></div>
+<blockquote>
+</blockquote>
+
+<h3 id="创建ca证书">创建CA证书</h3>
+
+<p>配置ca信息</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ vi ca-config.json
+<span class="o">{</span>
+  <span class="s2">&#34;signing&#34;</span>: <span class="o">{</span>
+    <span class="s2">&#34;default&#34;</span>: <span class="o">{</span>
+      <span class="s2">&#34;expiry&#34;</span>: <span class="s2">&#34;87600h&#34;</span>
+    <span class="o">}</span>,
+    <span class="s2">&#34;profiles&#34;</span>: <span class="o">{</span>
+      <span class="s2">&#34;kubernetes&#34;</span>: <span class="o">{</span>
+        <span class="s2">&#34;usages&#34;</span>: <span class="o">[</span>
+            <span class="s2">&#34;signing&#34;</span>,
+            <span class="s2">&#34;key encipherment&#34;</span>,
+            <span class="s2">&#34;server auth&#34;</span>,
+            <span class="s2">&#34;client auth&#34;</span>
+        <span class="o">]</span>,
+        <span class="s2">&#34;expiry&#34;</span>: <span class="s2">&#34;87600h&#34;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<blockquote>
+<p>容器相关证书类型</p>
+
+<p>client auth： 用于服务端认证客户端</p>
+
+<p>server auth: 服务端使用，客户端以此验证服务端身份</p>
+
+<p>client auth &amp; server auth : 双向证书，如用于etcd集群成员间通信</p>
+
+<p>这里配置一种证书类型kubernetes，为双向认证证书，有效期为87600h即10年。</p>
+</blockquote>
+
+<p>配置ca-csr</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ vi ca-csr.json
+<span class="o">{</span>
+  <span class="s2">&#34;CN&#34;</span>: <span class="s2">&#34;kubernetes&#34;</span>,
+  <span class="s2">&#34;key&#34;</span>: <span class="o">{</span>
+    <span class="s2">&#34;algo&#34;</span>: <span class="s2">&#34;rsa&#34;</span>,
+    <span class="s2">&#34;size&#34;</span>: <span class="m">2048</span>
+  <span class="o">}</span>,
+  <span class="s2">&#34;names&#34;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">&#34;C&#34;</span>: <span class="s2">&#34;CN&#34;</span>,
+      <span class="s2">&#34;ST&#34;</span>: <span class="s2">&#34;Beijing&#34;</span>,
+      <span class="s2">&#34;L&#34;</span>: <span class="s2">&#34;Beijing&#34;</span>,
+      <span class="s2">&#34;O&#34;</span>: <span class="s2">&#34;Kubernetes&#34;</span>,
+      <span class="s2">&#34;OU&#34;</span>: <span class="s2">&#34;Kubernetes-manual&#34;</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span></code></pre></div>
+<blockquote>
+<p>CN和O会影响kubernetes各组件之间的认证，注意在多个配置文件中保持一致</p>
+</blockquote>
+
+<p>生成CA证书</p>
+
+<p>在节点<code>k8s-m1</code>生成文件夹<code>/etc/kubernetes/pki</code>，用来存放生成的证书。这里生成ca证书</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="nb">export</span> <span class="nv">K8S_DIR</span><span class="o">=</span>/etc/kubernetes
+$ <span class="nb">export</span> <span class="nv">PKI_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/pki
+$ mkdir -p <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>
+$ cfssl gencert -initca ca-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca
+$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca*.pem
+/etc/kubernetes/pki/ca-key.pem  /etc/kubernetes/pki/ca.pem</code></pre></div>
+<h3 id="签发etcd证书">签发ETCD证书</h3>
+
+<p>在<code>k8s-m1</code>建立<code>/etc/etcd/ssl</code>文件夹，生成etcd需要的凭证。</p>
+
+<p>生成etcd ca</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ vi etcd-ca-csr.json
+<span class="o">{</span>
+  <span class="s2">&#34;CN&#34;</span>: <span class="s2">&#34;etcd&#34;</span>,
+  <span class="s2">&#34;key&#34;</span>: <span class="o">{</span>
+    <span class="s2">&#34;algo&#34;</span>: <span class="s2">&#34;rsa&#34;</span>,
+    <span class="s2">&#34;size&#34;</span>: <span class="m">2048</span>
+  <span class="o">}</span>,
+  <span class="s2">&#34;names&#34;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">&#34;C&#34;</span>: <span class="s2">&#34;CN&#34;</span>,
+      <span class="s2">&#34;ST&#34;</span>: <span class="s2">&#34;Beijing&#34;</span>,
+      <span class="s2">&#34;L&#34;</span>: <span class="s2">&#34;Beijing&#34;</span>,
+      <span class="s2">&#34;O&#34;</span>: <span class="s2">&#34;etcd&#34;</span>,
+      <span class="s2">&#34;OU&#34;</span>: <span class="s2">&#34;Etcd Security&#34;</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+$ <span class="nb">export</span> <span class="nv">DIR</span><span class="o">=</span>/etc/etcd/ssl
+$ mkdir -p <span class="si">${</span><span class="nv">DIR</span><span class="si">}</span>
+$ cfssl gencert -initca etcd-ca-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">DIR</span><span class="si">}</span>/etcd-ca</code></pre></div>
+<p>生成etcd证书</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ vi etcd-csr.json
+<span class="o">{</span>
+  <span class="s2">&#34;CN&#34;</span>: <span class="s2">&#34;etcd&#34;</span>,
+  <span class="s2">&#34;key&#34;</span>: <span class="o">{</span>
+    <span class="s2">&#34;algo&#34;</span>: <span class="s2">&#34;rsa&#34;</span>,
+    <span class="s2">&#34;size&#34;</span>: <span class="m">2048</span>
+  <span class="o">}</span>,
+  <span class="s2">&#34;names&#34;</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">&#34;C&#34;</span>: <span class="s2">&#34;CN&#34;</span>,
+      <span class="s2">&#34;ST&#34;</span>: <span class="s2">&#34;Beijing&#34;</span>,
+      <span class="s2">&#34;L&#34;</span>: <span class="s2">&#34;Beijing&#34;</span>,
+      <span class="s2">&#34;O&#34;</span>: <span class="s2">&#34;etcd&#34;</span>,
+      <span class="s2">&#34;OU&#34;</span>: <span class="s2">&#34;Etcd Security&#34;</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+$ cfssl gencert <span class="se">\
+</span><span class="se"></span>  -ca<span class="o">=</span><span class="si">${</span><span class="nv">DIR</span><span class="si">}</span>/etcd-ca.pem <span class="se">\
+</span><span class="se"></span>  -ca-key<span class="o">=</span><span class="si">${</span><span class="nv">DIR</span><span class="si">}</span>/etcd-ca-key.pem <span class="se">\
+</span><span class="se"></span>  -config<span class="o">=</span>ca-config.json <span class="se">\
+</span><span class="se"></span>  -hostname<span class="o">=</span><span class="m">127</span>.0.0.1,192.168.1.10,192.168.1.11,192.168.1.12 <span class="se">\
+</span><span class="se"></span>  -profile<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>  etcd-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">DIR</span><span class="si">}</span>/etcd</code></pre></div>
+<blockquote>
+<p>hostname需要设置所有master节点。</p>
+
+<p>profile为ca-config.json中设定的profile。</p>
+</blockquote>
+
+<p>删除不必要的csr文档，并查看是否生成证书</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ rm -rf <span class="si">${</span><span class="nv">DIR</span><span class="si">}</span>/*.csr
+$ ls /etc/etcd/ssl
+etcd-ca-key.pem  etcd-ca.pem  etcd-key.pem  etcd.pem</code></pre></div>
+<p>复制证书到其他master节点</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="k">for</span> NODE in k8s-m2 k8s-m3<span class="p">;</span> <span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&#34;--- </span><span class="nv">$NODE</span><span class="s2"> ---&#34;</span>
+    ssh <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span> <span class="s2">&#34; mkdir -p /etc/etcd/ssl&#34;</span>
+    <span class="k">for</span> FILE in etcd-ca-key.pem  etcd-ca.pem  etcd-key.pem  etcd.pem<span class="p">;</span> <span class="k">do</span>
+      scp /etc/etcd/ssl/<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span> <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span>:/etc/etcd/ssl/<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span>
+    <span class="k">done</span>
+  <span class="k">done</span></code></pre></div>
+<h3 id="api-server">API SERVER</h3>
+
+<p>生成API Server与kubelet client之间进行通信的证书。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ cfssl gencert <span class="se">\
+</span><span class="se"></span>  -ca<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="se">\
+</span><span class="se"></span>  -ca-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca-key.pem <span class="se">\
+</span><span class="se"></span>  -config<span class="o">=</span>ca-config.json <span class="se">\
+</span><span class="se"></span>  -hostname<span class="o">=</span><span class="m">10</span>.96.0.1,192.168.1.9,127.0.0.1,kubernetes.default <span class="se">\
+</span><span class="se"></span>  -profile<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>  apiserver-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/apiserver
+
+$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/apiserver*.pem
+/etc/kubernetes/pki/apiserver-key.pem  /etc/kubernetes/pki/apiserver.pem</code></pre></div>
+<blockquote>
+<p>这里<code>-hostname</code>的<code>10.96.0.1</code>是cluster IP，<code>192.168.1.9</code>是访问master的集群VIP，<code>kubernetes.default</code>是Kubernetes在 default namespace 自动建立的 API service domain name。</p>
+</blockquote>
+
+<h3 id="front-proxy-client">Front Proxy Client</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ cfssl gencert -initca front-proxy-ca-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/front-proxy-ca
+$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/front-proxy-ca*.pem
+/etc/kubernetes/pki/front-proxy-ca-key.pem  /etc/kubernetes/pki/front-proxy-ca.pem</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ cfssl gencert <span class="se">\
+</span><span class="se"></span>  -ca<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/front-proxy-ca.pem <span class="se">\
+</span><span class="se"></span>  -ca-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/front-proxy-ca-key.pem <span class="se">\
+</span><span class="se"></span>  -config<span class="o">=</span>ca-config.json <span class="se">\
+</span><span class="se"></span>  -profile<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>  front-proxy-client-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/front-proxy-client
+
+$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/front-proxy-client*.pem
+/etc/kubernetes/pki/front-proxy-client-key.pem  /etc/kubernetes/pki/front-proxy-client.pem</code></pre></div>
+<h3 id="controller-manager">Controller Manager</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ cfssl gencert <span class="se">\
+</span><span class="se"></span>  -ca<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="se">\
+</span><span class="se"></span>  -ca-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca-key.pem <span class="se">\
+</span><span class="se"></span>  -config<span class="o">=</span>ca-config.json <span class="se">\
+</span><span class="se"></span>  -profile<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>  manager-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/controller-manager
+
+$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/controller-manager*.pem
+/etc/kubernetes/pki/controller-manager-key.pem  /etc/kubernetes/pki/controller-manager.pem</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubectl config set-cluster kubernetes <span class="se">\
+</span><span class="se"></span>    --certificate-authority<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="se">\
+</span><span class="se"></span>    --embed-certs<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span><span class="se"></span>    --server<span class="o">=</span><span class="si">${</span><span class="nv">KUBE_APISERVER</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/controller-manager.conf
+
+$ kubectl config set-credentials system:kube-controller-manager <span class="se">\
+</span><span class="se"></span>    --client-certificate<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/controller-manager.pem <span class="se">\
+</span><span class="se"></span>    --client-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/controller-manager-key.pem <span class="se">\
+</span><span class="se"></span>    --embed-certs<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/controller-manager.conf
+
+$ kubectl config set-context system:kube-controller-manager@kubernetes <span class="se">\
+</span><span class="se"></span>    --cluster<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>    --user<span class="o">=</span>system:kube-controller-manager <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/controller-manager.conf
+
+$ kubectl config use-context system:kube-controller-manager@kubernetes <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/controller-manager.conf</code></pre></div>
+<h3 id="scheduler">Scheduler</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ cfssl gencert <span class="se">\
+</span><span class="se"></span>  -ca<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="se">\
+</span><span class="se"></span>  -ca-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca-key.pem <span class="se">\
+</span><span class="se"></span>  -config<span class="o">=</span>ca-config.json <span class="se">\
+</span><span class="se"></span>  -profile<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>  scheduler-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/scheduler
+
+$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/scheduler*.pem
+/etc/kubernetes/pki/scheduler-key.pem  /etc/kubernetes/pki/scheduler.pem</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubectl config set-cluster kubernetes <span class="se">\
+</span><span class="se"></span>    --certificate-authority<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="se">\
+</span><span class="se"></span>    --embed-certs<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span><span class="se"></span>    --server<span class="o">=</span><span class="si">${</span><span class="nv">KUBE_APISERVER</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/scheduler.conf
+
+$ kubectl config set-credentials system:kube-scheduler <span class="se">\
+</span><span class="se"></span>    --client-certificate<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/scheduler.pem <span class="se">\
+</span><span class="se"></span>    --client-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/scheduler-key.pem <span class="se">\
+</span><span class="se"></span>    --embed-certs<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/scheduler.conf
+
+$ kubectl config set-context system:kube-scheduler@kubernetes <span class="se">\
+</span><span class="se"></span>    --cluster<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>    --user<span class="o">=</span>system:kube-scheduler <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/scheduler.conf
+
+$ kubectl config use-context system:kube-scheduler@kubernetes <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/scheduler.conf</code></pre></div>
+<h3 id="admin">Admin</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ cfssl gencert <span class="se">\
+</span><span class="se"></span>  -ca<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="se">\
+</span><span class="se"></span>  -ca-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca-key.pem <span class="se">\
+</span><span class="se"></span>  -config<span class="o">=</span>ca-config.json <span class="se">\
+</span><span class="se"></span>  -profile<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>  admin-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/admin
+
+$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/admin*.pem
+/etc/kubernetes/pki/admin-key.pem  /etc/kubernetes/pki/admin.pem</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubectl config set-cluster kubernetes <span class="se">\
+</span><span class="se"></span>    --certificate-authority<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="se">\
+</span><span class="se"></span>    --embed-certs<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span><span class="se"></span>    --server<span class="o">=</span><span class="si">${</span><span class="nv">KUBE_APISERVER</span><span class="si">}</span> <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/admin.conf
+
+$ kubectl config set-credentials kubernetes-admin <span class="se">\
+</span><span class="se"></span>    --client-certificate<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/admin.pem <span class="se">\
+</span><span class="se"></span>    --client-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/admin-key.pem <span class="se">\
+</span><span class="se"></span>    --embed-certs<span class="o">=</span><span class="nb">true</span> <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/admin.conf
+
+$ kubectl config set-context kubernetes-admin@kubernetes <span class="se">\
+</span><span class="se"></span>    --cluster<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>    --user<span class="o">=</span>kubernetes-admin <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/admin.conf
+
+$ kubectl config use-context kubernetes-admin@kubernetes <span class="se">\
+</span><span class="se"></span>    --kubeconfig<span class="o">=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/admin.conf</code></pre></div>
+<h3 id="masters-kubelet">Masters Kubelet</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="k">for</span> NODE in k8s-m1 k8s-m2 k8s-m3<span class="p">;</span> <span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&#34;--- </span><span class="nv">$NODE</span><span class="s2"> ---&#34;</span>
+    cp kubelet-csr.json kubelet-<span class="nv">$NODE</span>-csr.json<span class="p">;</span>
+    sed -i <span class="s2">&#34;s/\$NODE/</span><span class="nv">$NODE</span><span class="s2">/g&#34;</span> kubelet-<span class="nv">$NODE</span>-csr.json<span class="p">;</span>
+    cfssl gencert <span class="se">\
+</span><span class="se"></span>      -ca<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="se">\
+</span><span class="se"></span>      -ca-key<span class="o">=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca-key.pem <span class="se">\
+</span><span class="se"></span>      -config<span class="o">=</span>ca-config.json <span class="se">\
+</span><span class="se"></span>      -hostname<span class="o">=</span><span class="nv">$NODE</span> <span class="se">\
+</span><span class="se"></span>      -profile<span class="o">=</span>kubernetes <span class="se">\
+</span><span class="se"></span>      kubelet-<span class="nv">$NODE</span>-csr.json <span class="p">|</span> cfssljson -bare <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet-<span class="nv">$NODE</span><span class="p">;</span>
+    rm kubelet-<span class="nv">$NODE</span>-csr.json
+  <span class="k">done</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet*.pem
+/etc/kubernetes/pki/kubelet-k8s-m1-key.pem  /etc/kubernetes/pki/kubelet-k8s-m2.pem
+/etc/kubernetes/pki/kubelet-k8s-m1.pem      /etc/kubernetes/pki/kubelet-k8s-m3-key.pem
+/etc/kubernetes/pki/kubelet-k8s-m2-key.pem  /etc/kubernetes/pki/kubelet-k8s-m3.pem</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="k">for</span> NODE in k8s-m1 k8s-m2 k8s-m3<span class="p">;</span> <span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&#34;--- </span><span class="nv">$NODE</span><span class="s2"> ---&#34;</span>
+    ssh <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span> <span class="s2">&#34;mkdir -p </span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span><span class="s2">&#34;</span>
+    scp <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/ca.pem
+    scp <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet-<span class="nv">$NODE</span>-key.pem <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet-key.pem
+    scp <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet-<span class="nv">$NODE</span>.pem <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet.pem
+    rm <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet-<span class="nv">$NODE</span>-key.pem <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet-<span class="nv">$NODE</span>.pem
+  <span class="k">done</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="k">for</span> NODE in k8s-m1 k8s-m2 k8s-m3<span class="p">;</span> <span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&#34;--- </span><span class="nv">$NODE</span><span class="s2"> ---&#34;</span>
+    ssh <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span> <span class="s2">&#34;cd </span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span><span class="s2"> &amp;&amp; \
+</span><span class="s2">      kubectl config set-cluster kubernetes \
+</span><span class="s2">        --certificate-authority=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span><span class="s2">/ca.pem \
+</span><span class="s2">        --embed-certs=true \
+</span><span class="s2">        --server=</span><span class="si">${</span><span class="nv">KUBE_APISERVER</span><span class="si">}</span><span class="s2"> \
+</span><span class="s2">        --kubeconfig=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span><span class="s2">/kubelet.conf &amp;&amp; \
+</span><span class="s2">      kubectl config set-credentials system:node:</span><span class="si">${</span><span class="nv">NODE</span><span class="si">}</span><span class="s2"> \
+</span><span class="s2">        --client-certificate=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span><span class="s2">/kubelet.pem \
+</span><span class="s2">        --client-key=</span><span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span><span class="s2">/kubelet-key.pem \
+</span><span class="s2">        --embed-certs=true \
+</span><span class="s2">        --kubeconfig=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span><span class="s2">/kubelet.conf &amp;&amp; \
+</span><span class="s2">      kubectl config set-context system:node:</span><span class="si">${</span><span class="nv">NODE</span><span class="si">}</span><span class="s2">@kubernetes \
+</span><span class="s2">        --cluster=kubernetes \
+</span><span class="s2">        --user=system:node:</span><span class="si">${</span><span class="nv">NODE</span><span class="si">}</span><span class="s2"> \
+</span><span class="s2">        --kubeconfig=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span><span class="s2">/kubelet.conf &amp;&amp; \
+</span><span class="s2">      kubectl config use-context system:node:</span><span class="si">${</span><span class="nv">NODE</span><span class="si">}</span><span class="s2">@kubernetes \
+</span><span class="s2">        --kubeconfig=</span><span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span><span class="s2">/kubelet.conf&#34;</span>
+  <span class="k">done</span></code></pre></div>
+<h3 id="service-account-key">Service Account Key</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ openssl genrsa -out <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/sa.key <span class="m">2048</span>
+$ openssl rsa -in <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/sa.key -pubout -out <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/sa.pub
+$ ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/sa.*
+/etc/kubernetes/pki/sa.key  /etc/kubernetes/pki/sa.pub</code></pre></div>
+<h3 id="复制文档到其他节点">复制文档到其他节点</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ rm -rf <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/*.csr <span class="se">\
+</span><span class="se"></span>    <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/scheduler*.pem <span class="se">\
+</span><span class="se"></span>    <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/controller-manager*.pem <span class="se">\
+</span><span class="se"></span>    <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/admin*.pem <span class="se">\
+</span><span class="se"></span>    <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/kubelet*.pem</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="k">for</span> NODE in k8s-m2 k8s-m3<span class="p">;</span> <span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&#34;--- </span><span class="nv">$NODE</span><span class="s2"> ---&#34;</span>
+    <span class="k">for</span> FILE in <span class="k">$(</span>ls <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+      scp <span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span> <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PKI_DIR</span><span class="si">}</span>/<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span>
+    <span class="k">done</span>
+  <span class="k">done</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ <span class="k">for</span> NODE in k8s-m2 k8s-m3<span class="p">;</span> <span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&#34;--- </span><span class="nv">$NODE</span><span class="s2"> ---&#34;</span>
+    <span class="k">for</span> FILE in admin.conf controller-manager.conf scheduler.conf<span class="p">;</span> <span class="k">do</span>
+      scp <span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span> <span class="si">${</span><span class="nv">NODE</span><span class="si">}</span>:<span class="si">${</span><span class="nv">K8S_DIR</span><span class="si">}</span>/<span class="si">${</span><span class="nv">FILE</span><span class="si">}</span>
+    <span class="k">done</span>
+  <span class="k">done</span></code></pre></div>
+<h2 id="kubernetes-masters设置">Kubernetes Masters设置</h2>
+
+<h2 id="kubernetes-nodes设置">Kubernetes Nodes设置</h2>
+
+<h2 id="kubernetes-core-addons部署">Kubernetes Core Addons部署</h2>
+
+<h2 id="kubernetes-网络设置">Kubernetes 网络设置</h2>
+
+<h2 id="kubernetes-extra-addons部署">Kubernetes Extra Addons部署</h2>
+
+<h1 id="使用说明">使用说明</h1>
+
+<ol>
+<li>xxxx</li>
+<li>xxxx</li>
+<li>xxxx</li>
+</ol>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://localhost:1313/tags/docker">Docker</a></span><span class="tag"><a href="http://localhost:1313/tags/kubernetes">Kubernetes</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2773 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2018-07-25 05:05 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="http://localhost:1313/posts/aliyun-k8s-repo/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>阿里云kubernetes镜像源</span>
+			</a>
+		</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2018 <a href="http://localhost:1313/">YorkYu（于耀畯）</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="http://localhost:1313/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
+	</footer>
+	<script>let haveHeader = true;</script>
+
+	<script src="/js/main.min.00689ba18bbf9422fda222b02b555f01d54bfbb9b6d02f9bcffad67bdb2ff2cd.js" integrity="sha256-AGiboYu/lCL9oiKwK1VfAdVL+7m20C+bz/rWe9sv8s0="></script>
+	
+<script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10"></' + 'script>')</script></body>
+
+</html>

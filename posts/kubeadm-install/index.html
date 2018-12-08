@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>国内环境安装kubeadm</title>
+	<link rel="stylesheet" href="/css/style.min.bde2f5cd3b77a52d8db26f638dfed4b52085d3ea252fdf5746658b9883382220.css" integrity="sha256-veL1zTt3pS2Nsm9jjf7UtSCF0+olL99XRmWLmIM4IiA=">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="http://localhost:1313/">YorkYu&#39;s Blog</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					<a href="/posts/">Posts</a>
+					<a href="/about-me/">About</a>
+				</nav>
+			</div>
+			<div class="hdr-right">
+				<div class="hdr-icons">
+					<span class="hide-in-mobile"><a href="https://twitter.com/" target="_blank" rel="noopener"><span class="screen-reader-text">twitter</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://github.com/" target="_blank" rel="noopener"><span class="screen-reader-text">github</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://linkedin.com/" target="_blank" rel="noopener"><span class="screen-reader-text">linkedin</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></span>
+					<button id="menu-btn" class="hdr-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast" style="display: none;">
+		<ul>
+			<li><a href="/posts/">Posts</a></li>
+			<li><a href="/about-me/">About</a></li>
+		</ul>
+	</div>
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jul 25, 2018</span></div>
+				<h1>国内环境安装kubeadm</h1>
+			</header>
+			<div class="content">
+				
+
+<p>使用kubeadm安装kubernetes集群会方便很多，但是国内网络环境在安装过程中下载k8s.gcr.io的镜像受阻，本文将告诉你基于国内环境如何使用kubeadm工具来安装部署kubernetes集群。</p>
+
+<h1 id="安装之前">安装之前</h1>
+
+<p>本文将使用最简单的两台机器进行试验，节点信息如下：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">IP Address</th>
+<th align="center">Host Name</th>
+<th align="center">CPU</th>
+<th align="center">Mem</th>
+<th align="center">DISK</th>
+<th align="center">OS</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">192.168.1.12</td>
+<td align="center">k8s-m3</td>
+<td align="center">2</td>
+<td align="center">4G</td>
+<td align="center">10G</td>
+<td align="center">CentOS 7</td>
+<td align="center">master节点</td>
+</tr>
+
+<tr>
+<td align="center">192.168.1.21</td>
+<td align="center">k8s-n2</td>
+<td align="center">2</td>
+<td align="center">4G</td>
+<td align="center">10G</td>
+<td align="center">CentOS 7</td>
+<td align="center">node节点</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="前提条件">前提条件</h2>
+
+<ul>
+<li>可行操作系统要求：Ubuntu 16.04+、Debian 9、CentOS 7、RHEL 7、Fedora <sup>25</sup>&frasl;<sub>26</sub> (best-effort)、HypriotOS v1.0.1+、Container Linux (tested with 1576.4.0)</li>
+<li>至少2GB RAM</li>
+<li>至少2CPUs</li>
+<li>所有机器局域网内联通</li>
+<li>每台机器拥有唯一hostname、MAC地址、product_uuid</li>
+<li>特定网络端口需要打开（参见后文）</li>
+<li>SELinux禁用</li>
+<li>Swap禁用</li>
+</ul>
+
+<h2 id="修改hostname">修改hostname</h2>
+
+<p>修改机器主机名</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ hostnamectl --static set-hostname k8s-m3</code></pre></div>
+<h2 id="设置机器网络静态ip">设置机器网络静态IP</h2>
+
+<p>CentOS默认使用dhcp方式连接网络，修改为静态ip地址</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
+...
+<span class="nv">BOOTPROTO</span><span class="o">=</span>static
+...
+<span class="nv">ONBOOT</span><span class="o">=</span>yes
+<span class="nv">BROADCAST</span><span class="o">=</span><span class="m">192</span>.168.1.255
+<span class="nv">IPADDR</span><span class="o">=</span><span class="m">192</span>.168.1.12
+<span class="nv">NETMASK</span><span class="o">=</span><span class="m">255</span>.255.255.0
+<span class="nv">GATEWAY</span><span class="o">=</span><span class="m">192</span>.168.1.1</code></pre></div>
+<h2 id="确认mac地址和uuid是否唯一">确认MAC地址和UUID是否唯一</h2>
+
+<ul>
+<li><p>使用命令查看mac地址<code>ip link</code> 或者 <code>ifconfig -a</code></p></li>
+
+<li><p>使用命令查看product_uuid</p></li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">  $ cat /sys/class/dmi/id/product_uuid</code></pre></div>
+<h2 id="检查特定网络端口">检查特定网络端口</h2>
+
+<p>Master node(s)</p>
+
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Direction</th>
+<th>Port Range</th>
+<th>Purpose</th>
+<th>Used By</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>6443*</td>
+<td>Kubernetes API server</td>
+<td>All</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>2379-2380</td>
+<td>etcd server client API</td>
+<td>kube-apiserver, etcd</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>10250</td>
+<td>Kubelet API</td>
+<td>Self, Control plane</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>10251</td>
+<td>kube-scheduler</td>
+<td>Self</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>10252</td>
+<td>kube-controller-manager</td>
+<td>Self</td>
+</tr>
+</tbody>
+</table>
+
+<p>Worker node(s)</p>
+
+<table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>Direction</th>
+<th>Port Range</th>
+<th>Purpose</th>
+<th>Used By</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>10250</td>
+<td>Kubelet API</td>
+<td>Self, Control plane</td>
+</tr>
+
+<tr>
+<td>TCP</td>
+<td>Inbound</td>
+<td>30000-32767</td>
+<td>NodePort Services**</td>
+<td>All</td>
+</tr>
+</tbody>
+</table>
+
+<p>** Default port range for <a href="https://kubernetes.io/docs/concepts/services-networking/service/" target="_blank">NodePort Services</a>.</p>
+
+<blockquote>
+<p>节点之间进行安全认证通信，需要打开相应的网络端口，为了简单期间，内部网络节点可以直接关闭防火墙。</p>
+
+<p><code>systemctl disable firewalld &amp;&amp; systemctl stop firewalld</code></p>
+</blockquote>
+
+<h2 id="selinux禁用">SELinux禁用</h2>
+
+<p>k8s要求禁用SELinux，使用如下命令：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ setenforce <span class="m">0</span>
+$ sed -i <span class="s1">&#39;s/SELINUX=enforcing/SELINUX=disabled/g&#39;</span> /etc/selinux/config</code></pre></div>
+<h2 id="swap禁用">Swap禁用</h2>
+
+<p>k8s团队建议禁用swap交换功能，能提升性能，需要修改fstab文件禁止swap挂载。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ swapoff -a <span class="o">&amp;&amp;</span> sysctl -w vm.swappiness<span class="o">=</span><span class="m">0</span> 
+$ sed <span class="s1">&#39;/swap.img/d&#39;</span> -i /etc/fstab <span class="c1">#不同机器可能不同</span>
+$ sed -i <span class="s1">&#39;s/(^.centos-swap swap.$)/#\1/&#39;</span> /etc/fstab </code></pre></div>
+<p>安装之前的设置汇总如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1">## 关闭防火墙</span>
+systemctl stop firewalld <span class="o">&amp;&amp;</span> systemctl disable firewalld
+<span class="c1">## 关闭SELinux</span>
+setenforce <span class="m">0</span>
+sed -i <span class="s1">&#39;s/SELINUX=enforcing/SELINUX=disabled/g&#39;</span> /etc/selinux/config
+<span class="c1">## 设置参数</span>
+cat <span class="s">&lt;&lt;EOF | tee /etc/sysctl.d/k8s.conf
+</span><span class="s">net.ipv4.ip_forward = 1
+</span><span class="s">net.bridge.bridge-nf-call-ip6tables = 1
+</span><span class="s">net.bridge.bridge-nf-call-iptables = 1
+</span><span class="s">EOF</span>
+sysctl -p /etc/sysctl.d/k8s.conf
+<span class="c1">## 禁用swap</span>
+swapoff -a <span class="o">&amp;&amp;</span> sysctl -w vm.swappiness<span class="o">=</span><span class="m">0</span>
+sed <span class="s1">&#39;/swap.img/d&#39;</span> -i /etc/fstab <span class="c1">#不同机器可能不同</span>
+sed -i <span class="s1">&#39;s/(^.centos-swap swap.$)/#\1/&#39;</span> /etc/fstab </code></pre></div>
+<h1 id="安装工具组件">安装工具组件</h1>
+
+<p>kubeadm使用静态Pod的方式安装其他组件，每个节点上需要安装docker、kubeadm、kubelet、kubectl。</p>
+
+<ul>
+<li><code>docker</code>：每个节点使用docker装载、运行镜像。</li>
+<li><code>kubeadm</code>：用来初始化、设定kubernetes集群。</li>
+<li><code>kubelet</code>：每个几点都需要运行的组件，用来启动pod和容器等。</li>
+<li><code>kubectl</code>：命令行工具，用来和集群进行交互。</li>
+</ul>
+
+<h2 id="安装docker">安装docker</h2>
+
+<p>在每个节点机器上安装docker，docker版本推荐使用17.03，其他版本如1.11、1.12、1.13也运行良好，但是17.06+版本可能也可以但是没有经过k8s团队测试和验证。安装docker很简单，使用下面的命令即可安装最新版。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ curl -fsSL https://get.docker.com/ <span class="p">|</span> sh</code></pre></div>
+<blockquote>
+<p>如果需要安装特定版本的docker可以参考 <a href="https://docs.docker.com/engine/installation/" target="_blank">docker官方安装指南</a>。</p>
+</blockquote>
+
+<p>使用如下命令在每个节点机器上开启docker</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ systemctl <span class="nb">enable</span> docker <span class="o">&amp;&amp;</span> systemctl start docker</code></pre></div>
+<h2 id="安装kubelet-kubeadm-kubectl">安装kubelet、kubeadm、kubectl</h2>
+
+<p>使用官方推荐的yum源进行安装，但是国内网络环境无法访问<code>packages.cloud.google.com</code>，我们需要使用国内阿里云提供的yum源进行安装。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1">## 官方镜像yum源(国外网络使用)</span>
+$ cat <span class="s">&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+</span><span class="s">[kubernetes]
+</span><span class="s">name=Kubernetes
+</span><span class="s">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+</span><span class="s">enabled=1
+</span><span class="s">gpgcheck=1
+</span><span class="s">repo_gpgcheck=1
+</span><span class="s">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+</span><span class="s">EOF</span>
+<span class="c1">## 阿里云镜像yum源(国内网络使用)</span>
+$ cat <span class="s">&lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+</span><span class="s">[kubernetes]
+</span><span class="s">name=Kubernetes
+</span><span class="s">baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+</span><span class="s">enabled=1
+</span><span class="s">gpgcheck=0
+</span><span class="s">repo_gpgcheck=0
+</span><span class="s">gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+</span><span class="s">        http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+</span><span class="s">EOF</span>
+
+$ setenforce <span class="m">0</span>
+$ yum install -y kubelet kubeadm kubectl
+$ systemctl <span class="nb">enable</span> kubelet <span class="o">&amp;&amp;</span> systemctl start kubelet</code></pre></div>
+<h1 id="部署集群">部署集群</h1>
+
+<p>所有组件安装完成并启动之后，就可以初始化和设置集群了。使用如下命令简单初始化集群，然后查看状态。</p>
+
+<h2 id="初始化集群">初始化集群</h2>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubeadm init --service-cidr <span class="m">10</span>.96.0.0/12 <span class="se">\
+</span><span class="se"></span>               --kubernetes-version v1.11.1 <span class="se">\
+</span><span class="se"></span>               --pod-network-cidr <span class="m">192</span>.168.0.0/16 <span class="se">\
+</span><span class="se"></span>               --token b0f7b8.8d1767876297d85c <span class="se">\
+</span><span class="se"></span>               --apiserver-advertise-address <span class="m">192</span>.168.1.9
+
+......
+Your Kubernetes master has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p <span class="nv">$HOME</span>/.kube
+  sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+  sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run <span class="s2">&#34;kubectl apply -f [podnetwork].yaml&#34;</span> with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+You can now join any number of machines by running the following on each node
+as root:
+
+  kubeadm join <span class="m">192</span>.168.1.12:6443 --token g1yor7.tdkxa53lmuulirzu --discovery-token-ca-cert-hash sha256:c10462631e76b83660042b16ac488f31c731e3188a655e3dc4fd58f746beb460</code></pre></div>
+<blockquote>
+<ul>
+<li><code>--pod-network-cidr</code> 采用calico网络插件时传<code>192.168.0.0/16</code>，采用flannel网络插件时传<code>10.244.0.0/16</code>。</li>
+<li>&ndash;apiserver-advertise-address时虚拟的IP地址。</li>
+<li><code>kubectl</code>默认使用<code>$HOME/.kube/config</code>文件进行连接，将生成的<code>/etc/kubernetes/admin.conf</code>作为配置文件就可以使用kubectl和节点进行交互了，比如查看节点状态<code>kubectl get node</code>。</li>
+</ul>
+</blockquote>
+
+<p>初始化如果顺利的话会看到kubeadm的下一步操作提示，这是查看node状态会发现是<code>NotReady</code>。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubectl get node
+NAME      STATUS     ROLES     AGE       VERSION
+k8s-m3    NotReady   master    3m        v1.11.1</code></pre></div>
+<p>其实原因在提示语中已告诉我们，由于还没有安装kubernetes需要的网络插件，节点中各组件无法进行通信，所以接下来根据提示安装网络插件。</p>
+
+<h2 id="安装pod网络插件">安装Pod网络插件</h2>
+
+<p>容器之间通信需要网络插件，打开<a href="https://kubernetes.io/docs/concepts/cluster-administration/addons/" target="_blank">k8s插件说明链接</a>，链接中已列出很多可用的网络插件，这里我们使用Calico安装。打开<a href="https://docs.projectcalico.org/v3.1/getting-started/kubernetes/" target="_blank">Calico快速安装说明</a>进行安装。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubectl apply -f <span class="se">\
+</span><span class="se"></span>https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
+$ kubectl apply -f <span class="se">\
+</span><span class="se"></span>https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+
+......
+configmap <span class="s2">&#34;calico-config&#34;</span> created
+daemonset <span class="s2">&#34;calico-etcd&#34;</span> created
+service <span class="s2">&#34;calico-etcd&#34;</span> created
+daemonset <span class="s2">&#34;calico-node&#34;</span> created
+deployment <span class="s2">&#34;calico-kube-controllers&#34;</span> created
+clusterrolebinding <span class="s2">&#34;calico-cni-plugin&#34;</span> created
+clusterrole <span class="s2">&#34;calico-cni-plugin&#34;</span> created
+serviceaccount <span class="s2">&#34;calico-cni-plugin&#34;</span> created
+clusterrolebinding <span class="s2">&#34;calico-kube-controllers&#34;</span> created
+clusterrole <span class="s2">&#34;calico-kube-controllers&#34;</span> created
+serviceaccount <span class="s2">&#34;calico-kube-controllers&#34;</span> created
+
+$ watch kubectl get pods --all-namespaces
+.....
+NAMESPACE    NAME                                       READY  STATUS   RESTARTS  AGE
+kube-system  calico-etcd-x2482                          <span class="m">1</span>/1    Running  <span class="m">0</span>         2m
+kube-system  calico-kube-controllers-6ff88bf6d4-tgtzb   <span class="m">1</span>/1    Running  <span class="m">0</span>         2m
+kube-system  calico-node-24h85                          <span class="m">2</span>/2    Running  <span class="m">0</span>         2m
+kube-system  etcd-jbaker-virtualbox                     <span class="m">1</span>/1    Running  <span class="m">0</span>         6m
+kube-system  kube-apiserver-jbaker-virtualbox           <span class="m">1</span>/1    Running  <span class="m">0</span>         6m
+kube-system  kube-controller-manager-jbaker-virtualbox  <span class="m">1</span>/1    Running  <span class="m">0</span>         6m
+kube-system  kube-dns-545bc4bfd4-67qqp                  <span class="m">3</span>/3    Running  <span class="m">0</span>         5m
+kube-system  kube-proxy-8fzp2                           <span class="m">1</span>/1    Running  <span class="m">0</span>         5m
+kube-system  kube-scheduler-jbaker-virtualbox           <span class="m">1</span>/1    Running  <span class="m">0</span>         5m</code></pre></div>
+<blockquote>
+<p><a href="https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/calico" target="_blank">calico官方推荐安装方法</a></p>
+
+<p>calico需要etcd分布式存储网络节点信息，可以自己安装etcd供calico使用，也可以使用kubernetes API存储的etcd集群。</p>
+
+<p>安装flannel网络插件使用下面的命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">&gt; $ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.10.0/Documentation/kube-flannel.yml  
+&gt; $ kubectl -n kube-system get po -l <span class="nv">app</span><span class="o">=</span>flannel -o wide
+&gt; <span class="sb">```</span>
+
+当所有pod的状态变为<span class="sb">`</span>Running<span class="sb">`</span>后在使用如下命令查看node状态，如果状态变为<span class="sb">`</span>Ready<span class="sb">`</span>就可以加入Node节点了。
+
+<span class="sb">```</span>sh
+$ kubectl get node
+NAME      STATUS    ROLES     AGE       VERSION
+k8s-m3    Ready     master    19m       v1.11.1</code></pre></div>
+<p>让master节点也能被调度运行Pod</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubectl taint nodes --all node-role.kubernetes.io/master-
+node/k8s-m3 untainted</code></pre></div>
+<h2 id="加入节点">加入节点</h2>
+
+<p>当master节点上网络插件安装正确完成后，就可以加入node节点了，在要加入的node节点机器上运行如下命令即可。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubeadm join <span class="m">192</span>.168.1.12:6443 --token &lt;token&gt; --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</code></pre></div>
+<blockquote>
+<p><code>192.168.1.12</code>是master主节点的ip地址，<code>--token</code>是自动生成的令牌用于node节点和master节点之间进行通信认证。</p>
+
+<ul>
+<li>获取&ndash;token<code>kubeadm token list</code></li>
+<li>生成token<code>kubeadm token create</code></li>
+<li>获取&ndash;discovery-token-ca-cert-hash</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">&gt; openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt <span class="p">|</span> openssl rsa -pubin -outform der <span class="m">2</span>&gt;/dev/null <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>&gt;    openssl dgst -sha256 -hex <span class="p">|</span> sed <span class="s1">&#39;s/^.* //&#39;</span>
+&gt; <span class="sb">```</span>
+
+查看node节点状态，我们发现<span class="sb">`</span>k8s-n2<span class="sb">`</span>节点已经加入集群中了，状态也显示为Ready。</code></pre></div>
+<p>$ kubectl get node
+NAME      STATUS    ROLES     AGE       VERSION
+k8s-m3    Ready     master    24m       v1.11.1
+k8s-n2    Ready     <none>    29s       v1.11.1</p>
+
+<pre><code>
+&gt; 如果节点状态总是不能为Ready，可以使用命令查看event事件记录查找原因，往往都是由于网络无法下载k8s.gcr.io镜像导致。
+&gt;
+&gt; ```sh
+&gt; kubectl describe node k8s-n2
+&gt; ```
+
+## 移除节点
+
+移除节点需要先和master节点通信删除节点中所有运行容器
+
+</code></pre>
+
+<p>kubectl drain <node name> &ndash;delete-local-data &ndash;force &ndash;ignore-daemonsets
+kubectl delete node <node name></p>
+
+<pre><code>
+再使用kubeadm重置删除节点
+
+</code></pre>
+
+<p>kubeadm reset</p>
+
+<pre><code>
+## kubeadm命令
+
+- `kubeadm init`：初始化集群。
+- `kubeadm join`：添加集群节点。
+- `kubeadm reset`： 移除节点。
+- `kubeadm --help`：更多命令查看帮助。
+
+# 安装Dashboard
+
+集群搭建完成后，我们试着安装一个Dashboard应用来测试下我们的集群是否可用，参见[Dashboard](https://github.com/kubernetes/dashboard#kubernetes-dashboard)官方说明。
+
+```SH
+## dashboard文件：anonymous-proxy-rbac.yml  kubernetes-dashboard.yml
+$ kubectl apply -f ./dashboard/
+</code></pre>
+</blockquote>
+
+<ul>
+<li>anonymous-proxy-rbac.yml</li>
+</ul>
+
+<pre><code>kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: anonymous-dashboard-proxy-role
+rules:
+- apiGroups:
+  - &quot;&quot;
+  resources:
+  - &quot;services/proxy&quot;
+  resourceNames:
+  - &quot;https:kubernetes-dashboard:&quot;
+  verbs:
+  - get
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: anonymous-dashboard-proxy-binding
+  namespace: &quot;&quot;
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: anonymous-dashboard-proxy-role
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:anonymous
+</code></pre>
+
+<ul>
+<li>kubernetes-dashboard.yml</li>
+</ul>
+
+<pre><code># Copyright 2017 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Configuration to deploy release version of the Dashboard UI compatible with
+# Kubernetes 1.8.
+#
+# Example usage: kubectl create -f &lt;this_file&gt;
+
+# ------------------- Dashboard Secret ------------------- #
+
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard-certs
+  namespace: kube-system
+type: Opaque
+
+---
+# ------------------- Dashboard Service Account ------------------- #
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kube-system
+
+---
+# ------------------- Dashboard Role &amp; Role Binding ------------------- #
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kubernetes-dashboard-minimal
+  namespace: kube-system
+rules:
+  # Allow Dashboard to create 'kubernetes-dashboard-key-holder' secret.
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;secrets&quot;]
+  verbs: [&quot;create&quot;]
+  # Allow Dashboard to create 'kubernetes-dashboard-settings' config map.
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;configmaps&quot;]
+  verbs: [&quot;create&quot;]
+  # Allow Dashboard to get, update and delete Dashboard exclusive secrets.
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;secrets&quot;]
+  resourceNames: [&quot;kubernetes-dashboard-key-holder&quot;, &quot;kubernetes-dashboard-certs&quot;]
+  verbs: [&quot;get&quot;, &quot;update&quot;, &quot;delete&quot;]
+  # Allow Dashboard to get and update 'kubernetes-dashboard-settings' config map.
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;configmaps&quot;]
+  resourceNames: [&quot;kubernetes-dashboard-settings&quot;]
+  verbs: [&quot;get&quot;, &quot;update&quot;]
+  # Allow Dashboard to get metrics from heapster.
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;services&quot;]
+  resourceNames: [&quot;heapster&quot;]
+  verbs: [&quot;proxy&quot;]
+- apiGroups: [&quot;&quot;]
+  resources: [&quot;services/proxy&quot;]
+  resourceNames: [&quot;heapster&quot;, &quot;http:heapster:&quot;, &quot;https:heapster:&quot;]
+  verbs: [&quot;get&quot;]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubernetes-dashboard-minimal
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: kubernetes-dashboard-minimal
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-dashboard
+  namespace: kube-system
+
+---
+# ------------------- Dashboard Deployment ------------------- #
+
+kind: Deployment
+apiVersion: apps/v1beta2
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kube-system
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-dashboard
+  template:
+    metadata:
+      labels:
+        k8s-app: kubernetes-dashboard
+    spec:
+      containers:
+      - name: kubernetes-dashboard
+        image: k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.3
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8443
+          protocol: TCP
+        args:
+          - --auto-generate-certificates
+          # Uncomment the following line to manually specify Kubernetes API server Host
+          # If not specified, Dashboard will attempt to auto discover the API server and connect
+          # to it. Uncomment only if the default does not work.
+          # - --apiserver-host=http://my-address:port
+        volumeMounts:
+        - name: kubernetes-dashboard-certs
+          mountPath: /certs
+          # Create on-disk volume to store exec logs
+        - mountPath: /tmp
+          name: tmp-volume
+        livenessProbe:
+          httpGet:
+            scheme: HTTPS
+            path: /
+            port: 8443
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+      volumes:
+      - name: kubernetes-dashboard-certs
+        secret:
+          secretName: kubernetes-dashboard-certs
+      - name: tmp-volume
+        emptyDir: {}
+      serviceAccountName: kubernetes-dashboard
+      # Comment the following tolerations if Dashboard must not be deployed on master
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+
+---
+# ------------------- Dashboard Service ------------------- #
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kube-system
+spec:
+  ports:
+    - port: 443
+      targetPort: 8443
+  selector:
+    k8s-app: kubernetes-dashboard
+</code></pre>
+
+<p>执行成功后，打开如下网址进行访问：</p>
+
+<p><code>https://{VIP}:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/</code></p>
+
+<p>获取token，粘贴在网页中进行登录访问</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubectl -n kube-system create sa dashboard
+$ kubectl create clusterrolebinding dashboard --clusterrole cluster-admin --serviceaccount<span class="o">=</span>kube-system:dashboard
+$ <span class="nv">SECRET</span><span class="o">=</span><span class="k">$(</span>kubectl -n kube-system get sa dashboard -o yaml <span class="p">|</span> awk <span class="s1">&#39;/dashboard-token/ {print $3}&#39;</span><span class="k">)</span>
+$ kubectl -n kube-system describe secrets <span class="si">${</span><span class="nv">SECRET</span><span class="si">}</span> <span class="p">|</span> awk <span class="s1">&#39;/token:/{print $2}&#39;</span>
+
+<span class="c1">## 获取token命令：</span>
+kubectl -n kube-system describe secrets <span class="k">$(</span>kubectl -n kube-system get sa dashboard -o yaml <span class="p">|</span> awk <span class="s1">&#39;/dashboard-token/ {print $3}&#39;</span><span class="k">)</span> <span class="p">|</span> awk <span class="s1">&#39;/token:/{print $2}&#39;</span></code></pre></div>
+<h1 id="安装metric-server">安装metric server</h1>
+
+<p><a href="https://github.com/kubernetes-incubator/metrics-server" target="_blank">metic server</a>用来监控资源运行状态，可以在其基础上实现HPA，将来要取代heapter。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">$ kubectl create -f deploy/1.8+/
+$ kubectl top node
+$ kubectl top pod --all-namespaces</code></pre></div>
+<h1 id="troubleshooting">Troubleshooting</h1>
+
+<ol>
+<li><code>kubeadm init</code>命令运行报错：</li>
+</ol>
+
+<p>unable to get URL &ldquo;<a href="https://dl.k8s.io/release/stable-1.11.txt&quot;:" target="_blank">https://dl.k8s.io/release/stable-1.11.txt&quot;:</a> Get <a href="https://storage.googleapis.com/kubernetes-release/release/stable-1.11.txt:" target="_blank">https://storage.googleapis.com/kubernetes-release/release/stable-1.11.txt:</a> net/http: TLS handshake timeout</p>
+
+<p>原因：通过访问这两个文件获取安装的最新kubernetes版本号，由于国内网络原因无法访问域名<code>k8s.io</code> <code>googleapis.com</code>故获取失败。</p>
+
+<p>方案：1使用梯子；2指定kubernetes参数<code>kubeadm init --kubernetes-version=v1.11.1</code></p>
+
+<ol>
+<li>ImagePullBackOff 容器运行错误</li>
+</ol>
+
+<p>原因：网络无法下载镜像</p>
+
+<p>方案：参见<a href="http://yaojunyu.github.io/2018/07/25/build-self-docker-repo/" target="_blank">无法访问gcr.io怎么办，搭建自己的镜像库</a></p>
+
+<ol>
+<li>容器无法访问外部网络，coredns：no route to host</li>
+</ol>
+
+<p>原因： 未关闭防火墙</p>
+
+<p>方案：关闭防火墙或者打开必要端口</p>
+
+<ol>
+<li>kubectl top node 报错：error: metrics not available yet</li>
+</ol>
+
+<p>kubectl get &ndash;raw &ldquo;/apis/metrics.k8s.io/v1beta1/nodes&rdquo; 显示节点信息为空</p>
+
+<p>原因：可能是10250端口默认未开启</p>
+
+<p>方案：修改部署文件，替换&ndash;source</p>
+
+<pre><code>   kubectl -n kube-system edit deploy metrics-server
+   --source=kubernetes.summary_api:https://kubernetes.default?kubeletHttps=true&amp;kubeletPort=10250&amp;insecure=true
+   
+   kubectl top pod --all-namespaces
+</code></pre>
+
+<ol>
+<li></li>
+</ol>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://localhost:1313/tags/kubernetes">kubernetes</a></span><span class="tag"><a href="http://localhost:1313/tags/kubeadm">kubeadm</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>4045 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2018-07-26 02:11 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="http://localhost:1313/posts/build-self-docker-repo/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>无法访问gcr.io怎么办?搭建自己的镜像库</span>
+			</a>
+			<a class="prev-post" href="http://localhost:1313/posts/aliyun-k8s-repo/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>阿里云kubernetes镜像源</span>
+			</a>
+		</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2018 <a href="http://localhost:1313/">YorkYu（于耀畯）</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="http://localhost:1313/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
+	</footer>
+	<script>let haveHeader = true;</script>
+
+	<script src="/js/main.min.00689ba18bbf9422fda222b02b555f01d54bfbb9b6d02f9bcffad67bdb2ff2cd.js" integrity="sha256-AGiboYu/lCL9oiKwK1VfAdVL+7m20C+bz/rWe9sv8s0="></script>
+	
+<script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10"></' + 'script>')</script></body>
+
+</html>

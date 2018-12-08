@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://localhost:1313/about-me/</loc>
+    <lastmod>2018-12-07T11:30:22+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/posts/build-self-docker-repo/</loc>
+    <lastmod>2018-07-25T23:48:55+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/posts/kubeadm-install/</loc>
+    <lastmod>2018-07-25T18:11:44+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/posts/aliyun-k8s-repo/</loc>
+    <lastmod>2018-07-25T11:51:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/posts/kubernetes-install/</loc>
+    <lastmod>2018-07-24T21:05:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/docker/</loc>
+    <lastmod>2018-07-25T23:48:55+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/kubeadm/</loc>
+    <lastmod>2018-07-25T18:11:44+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/kubernetes/</loc>
+    <lastmod>2018-07-25T23:48:55+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/kubernets/</loc>
+    <lastmod>2018-07-25T11:51:37+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2018-07-25T23:48:55+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2018-07-25T23:48:55+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2018-12-07T11:30:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/yum/</loc>
+    <lastmod>2018-07-25T11:51:37+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
