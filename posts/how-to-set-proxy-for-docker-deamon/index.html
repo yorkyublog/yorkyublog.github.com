@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<title>如何设置Docker代理下载镜像</title>
+	<link rel="stylesheet" href="/css/style.min.bde2f5cd3b77a52d8db26f638dfed4b52085d3ea252fdf5746658b9883382220.css" integrity="sha256-veL1zTt3pS2Nsm9jjf7UtSCF0+olL99XRmWLmIM4IiA=">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="http://localhost:1313/">YorkYu&#39;s Blog</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					<a href="/posts/">Posts</a>
+					<a href="/about-me/">About</a>
+				</nav>
+			</div>
+			<div class="hdr-right">
+				<div class="hdr-icons">
+					<span class="hide-in-mobile"><a href="https://twitter.com/" target="_blank" rel="noopener"><span class="screen-reader-text">twitter</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://github.com/" target="_blank" rel="noopener"><span class="screen-reader-text">github</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://linkedin.com/" target="_blank" rel="noopener"><span class="screen-reader-text">linkedin</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></span>
+					<button id="menu-btn" class="hdr-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast" style="display: none;">
+		<ul>
+			<li><a href="/posts/">Posts</a></li>
+			<li><a href="/about-me/">About</a></li>
+		</ul>
+	</div>
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Dec 8, 2018</span></div>
+				<h1>如何设置Docker代理下载镜像</h1>
+			</header>
+			<div class="content">
+				
+
+<p>如何让docker pull可以下载gcr.io的镜像？</p>
+
+<h3 id="centos下载shadowsocks客户端">CentOS下载shadowsocks客户端</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;https://bootstrap.pypa.io/get-pip.py&#34;</span> -o <span class="s2">&#34;get-pip.py&#34;</span>
+python get-pip.py
+pip install --upgrade pip
+pip install shadowsocks</code></pre></div>
+<h3 id="配置shadowsocks-并运行">配置shadowsocks，并运行</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">vi /etc/shadowsocks.json
+<span class="o">{</span>
+    <span class="s2">&#34;server&#34;</span>:<span class="s2">&#34;x.x.x.x&#34;</span>,
+    <span class="s2">&#34;server_port&#34;</span>:1024,
+    <span class="s2">&#34;local_address&#34;</span>:<span class="s2">&#34;127.0.0.1&#34;</span>,
+    <span class="s2">&#34;local_port&#34;</span>:1087,
+    <span class="s2">&#34;password&#34;</span>:<span class="s2">&#34;password&#34;</span>,
+    <span class="s2">&#34;timeout&#34;</span>:300,
+    <span class="s2">&#34;method&#34;</span>:<span class="s2">&#34;aes-256-cfb&#34;</span>,
+    <span class="s2">&#34;workers&#34;</span>: <span class="m">1</span>
+<span class="o">}</span>
+nohup sslocal -c /etc/shadowsocks.json /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+<span class="nb">echo</span> <span class="s2">&#34; nohup sslocal -c /etc/shadowsocks.json /dev/null 2&gt;&amp;1 &amp;&#34;</span> &gt;&gt; /etc/rc.local</code></pre></div>
+<h3 id="验证shadowsocks-返回origin则正确">验证shadowsocks，返回origin则正确</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl --socks5 <span class="m">127</span>.0.0.1:1087 http://httpbin.org/ip
+<span class="o">{</span>
+  <span class="s2">&#34;origin&#34;</span>: <span class="s2">&#34;x.x.x.x&#34;</span>
+<span class="o">}</span></code></pre></div>
+<h3 id="安装privoxy">安装privoxy</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">useradd privoxy
+wget http://www.silvester.org.uk/privoxy/source/3.0.26%20%28stable%29/privoxy-3.0.26-stable-src.tar.gz
+tar -zxvf privoxy-3.0.26-stable-src.tar.gz
+<span class="nb">cd</span> privoxy-3.0.26-stable
+yum install autoconf gcc -y
+autoheader <span class="o">&amp;&amp;</span> autoconf
+./configure
+make <span class="o">&amp;&amp;</span> make install</code></pre></div>
+<h3 id="设置proxy代理并运行">设置proxy代理并运行</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">vi /usr/local/etc/privoxy/config
+<span class="c1"># 8118 是默认端口，不用改，下面会用到</span>
+listen-address <span class="m">127</span>.0.0.1:8118
+ <span class="c1"># 这里的端口写 shadowsocks 的本地端口（注意最后那个 . 不要漏了）</span>
+forward-socks5t / <span class="m">127</span>.0.0.1:1087 .
+privoxy --user privoxy /usr/local/etc/privoxy/config</code></pre></div>
+<h3 id="设置代理变量">设置代理变量</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#这里的端口和上面 privoxy 中的保持一致</span>
+<span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:8118
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:8118</code></pre></div>
+<h3 id="设置docker-deamon代理">设置docker deamon代理</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">vi /etc/sysconfig/docker
++
+<span class="nv">HTTP_PROXY</span><span class="o">=</span><span class="m">127</span>.0.0.1:8118
+<span class="nv">HTTPS_PROXY</span><span class="o">=</span><span class="m">127</span>.0.0.1:8118
+<span class="nv">NO_PROXY</span><span class="o">=</span>registry.cn-hangzhou.aliyuncs.com,obs.*.myhwclouds.com</code></pre></div>
+<h3 id="验证docker-pull">验证docker pull</h3>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">docker pull gcr.io/google_containers/busybox</code></pre></div>
+<p>如果能顺利下载镜像，则大功告成。</p>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://localhost:1313/tags/docker">Docker</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>317 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2018-12-08 14:35 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="http://localhost:1313/posts/build-self-docker-repo/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>无法访问gcr.io怎么办?搭建自己的镜像库</span>
+			</a>
+		</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2018 <a href="http://localhost:1313/">YorkYu（于耀畯）</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="http://localhost:1313/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
+	</footer>
+	<script>let haveHeader = true;</script>
+
+	<script src="/js/main.min.00689ba18bbf9422fda222b02b555f01d54bfbb9b6d02f9bcffad67bdb2ff2cd.js" integrity="sha256-AGiboYu/lCL9oiKwK1VfAdVL+7m20C+bz/rWe9sv8s0="></script>
+	
+<script data-no-instant>document.write('<script src="/livereload.js?port=1313&mindelay=10"></' + 'script>')</script></body>
+
+</html>

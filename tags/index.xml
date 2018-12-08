@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 25 Jul 2018 23:48:55 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Dec 2018 14:35:55 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Docker</title>
       <link>http://localhost:1313/tags/docker/</link>
-      <pubDate>Wed, 25 Jul 2018 23:48:55 +0000</pubDate>
+      <pubDate>Sat, 08 Dec 2018 14:35:55 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/docker/</guid>
       <description></description>
