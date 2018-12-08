@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on YorkYu&#39;s Blog</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://yorkyublog.github.io/tags/</link>
     <description>Recent content in Tags on YorkYu&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sat, 08 Dec 2018 14:35:55 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yorkyublog.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Docker</title>
-      <link>http://localhost:1313/tags/docker/</link>
+      <link>https://yorkyublog.github.io/tags/docker/</link>
       <pubDate>Sat, 08 Dec 2018 14:35:55 +0800</pubDate>
       
-      <guid>http://localhost:1313/tags/docker/</guid>
+      <guid>https://yorkyublog.github.io/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubeadm</title>
-      <link>http://localhost:1313/tags/kubeadm/</link>
+      <link>https://yorkyublog.github.io/tags/kubeadm/</link>
       <pubDate>Wed, 25 Jul 2018 18:11:44 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/kubeadm/</guid>
+      <guid>https://yorkyublog.github.io/tags/kubeadm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubernetes</title>
-      <link>http://localhost:1313/tags/kubernetes/</link>
+      <link>https://yorkyublog.github.io/tags/kubernetes/</link>
       <pubDate>Wed, 25 Jul 2018 23:48:55 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/kubernetes/</guid>
+      <guid>https://yorkyublog.github.io/tags/kubernetes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubernets</title>
-      <link>http://localhost:1313/tags/kubernets/</link>
+      <link>https://yorkyublog.github.io/tags/kubernets/</link>
       <pubDate>Wed, 25 Jul 2018 11:51:37 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/kubernets/</guid>
+      <guid>https://yorkyublog.github.io/tags/kubernets/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Yum</title>
-      <link>http://localhost:1313/tags/yum/</link>
+      <link>https://yorkyublog.github.io/tags/yum/</link>
       <pubDate>Wed, 25 Jul 2018 11:51:37 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/yum/</guid>
+      <guid>https://yorkyublog.github.io/tags/yum/</guid>
       <description></description>
     </item>
     

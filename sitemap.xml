@@ -3,84 +3,84 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://localhost:1313/posts/how-to-set-proxy-for-docker-deamon/</loc>
+    <loc>https://yorkyublog.github.io/posts/how-to-set-proxy-for-docker-deamon/</loc>
     <lastmod>2018-12-08T14:35:55+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about-me/</loc>
+    <loc>https://yorkyublog.github.io/about-me/</loc>
     <lastmod>2018-12-07T11:30:22+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/posts/build-self-docker-repo/</loc>
+    <loc>https://yorkyublog.github.io/posts/build-self-docker-repo/</loc>
     <lastmod>2018-07-25T23:48:55+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/posts/kubeadm-install/</loc>
+    <loc>https://yorkyublog.github.io/posts/kubeadm-install/</loc>
     <lastmod>2018-07-25T18:11:44+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/posts/aliyun-k8s-repo/</loc>
+    <loc>https://yorkyublog.github.io/posts/aliyun-k8s-repo/</loc>
     <lastmod>2018-07-25T11:51:37+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/posts/kubernetes-install/</loc>
+    <loc>https://yorkyublog.github.io/posts/kubernetes-install/</loc>
     <lastmod>2018-07-24T21:05:32+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://yorkyublog.github.io/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/docker/</loc>
+    <loc>https://yorkyublog.github.io/tags/docker/</loc>
     <lastmod>2018-12-08T14:35:55+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/kubeadm/</loc>
+    <loc>https://yorkyublog.github.io/tags/kubeadm/</loc>
     <lastmod>2018-07-25T18:11:44+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/kubernetes/</loc>
+    <loc>https://yorkyublog.github.io/tags/kubernetes/</loc>
     <lastmod>2018-07-25T23:48:55+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/kubernets/</loc>
+    <loc>https://yorkyublog.github.io/tags/kubernets/</loc>
     <lastmod>2018-07-25T11:51:37+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://yorkyublog.github.io/posts/</loc>
     <lastmod>2018-12-08T14:35:55+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://yorkyublog.github.io/tags/</loc>
     <lastmod>2018-12-08T14:35:55+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://yorkyublog.github.io/</loc>
     <lastmod>2018-12-08T14:35:55+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/yum/</loc>
+    <loc>https://yorkyublog.github.io/tags/yum/</loc>
     <lastmod>2018-07-25T11:51:37+00:00</lastmod>
     <priority>0</priority>
   </url>

@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docker on YorkYu&#39;s Blog</title>
-    <link>http://localhost:1313/tags/docker/</link>
+    <link>https://yorkyublog.github.io/tags/docker/</link>
     <description>Recent content in Docker on YorkYu&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sat, 08 Dec 2018 14:35:55 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yorkyublog.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>如何设置Docker代理下载镜像</title>
-      <link>http://localhost:1313/posts/how-to-set-proxy-for-docker-deamon/</link>
+      <link>https://yorkyublog.github.io/posts/how-to-set-proxy-for-docker-deamon/</link>
       <pubDate>Sat, 08 Dec 2018 14:35:55 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/how-to-set-proxy-for-docker-deamon/</guid>
+      <guid>https://yorkyublog.github.io/posts/how-to-set-proxy-for-docker-deamon/</guid>
       <description>如何让docker pull可以下载gcr.io的镜像？ CentOS下载shadowsocks客户端 curl &amp;#34;https://bootstrap.pypa.io/get-pip.py&amp;#34; -o &amp;#34;get-pip.py&amp;#34; python get-pip.py pip install --upgrade pip pip install shadowsocks 配置shadow</description>
     </item>
     
     <item>
       <title>无法访问gcr.io怎么办?搭建自己的镜像库</title>
-      <link>http://localhost:1313/posts/build-self-docker-repo/</link>
+      <link>https://yorkyublog.github.io/posts/build-self-docker-repo/</link>
       <pubDate>Wed, 25 Jul 2018 23:48:55 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/build-self-docker-repo/</guid>
+      <guid>https://yorkyublog.github.io/posts/build-self-docker-repo/</guid>
       <description>由于在国内无法访问gcr.io域名，安装kubernetes时很容易被镜像无法下载而安装受阻，本文介绍使用docker hub和github来</description>
     </item>
     
     <item>
       <title>kubernete集群搭建与安装部署(v1.11.0)</title>
-      <link>http://localhost:1313/posts/kubernetes-install/</link>
+      <link>https://yorkyublog.github.io/posts/kubernetes-install/</link>
       <pubDate>Tue, 24 Jul 2018 21:05:32 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/kubernetes-install/</guid>
+      <guid>https://yorkyublog.github.io/posts/kubernetes-install/</guid>
       <description>全手工从0到1搭建一个kubernete集群，使用版本v1.11.0完成 项目介绍 该文档描述了全手工从0到1搭建一个kubernete集群，使</description>
     </item>
     

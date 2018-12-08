@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kubernetes on YorkYu&#39;s Blog</title>
-    <link>http://localhost:1313/tags/kubernetes/</link>
+    <link>https://yorkyublog.github.io/tags/kubernetes/</link>
     <description>Recent content in Kubernetes on YorkYu&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Wed, 25 Jul 2018 23:48:55 +0000</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yorkyublog.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>无法访问gcr.io怎么办?搭建自己的镜像库</title>
-      <link>http://localhost:1313/posts/build-self-docker-repo/</link>
+      <link>https://yorkyublog.github.io/posts/build-self-docker-repo/</link>
       <pubDate>Wed, 25 Jul 2018 23:48:55 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/build-self-docker-repo/</guid>
+      <guid>https://yorkyublog.github.io/posts/build-self-docker-repo/</guid>
       <description>由于在国内无法访问gcr.io域名，安装kubernetes时很容易被镜像无法下载而安装受阻，本文介绍使用docker hub和github来</description>
     </item>
     
     <item>
       <title>国内环境安装kubeadm</title>
-      <link>http://localhost:1313/posts/kubeadm-install/</link>
+      <link>https://yorkyublog.github.io/posts/kubeadm-install/</link>
       <pubDate>Wed, 25 Jul 2018 18:11:44 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/kubeadm-install/</guid>
+      <guid>https://yorkyublog.github.io/posts/kubeadm-install/</guid>
       <description>使用kubeadm安装kubernetes集群会方便很多，但是国内网络环境在安装过程中下载k8s.gcr.io的镜像受阻，本文将告诉你基于国</description>
     </item>
     
     <item>
       <title>kubernete集群搭建与安装部署(v1.11.0)</title>
-      <link>http://localhost:1313/posts/kubernetes-install/</link>
+      <link>https://yorkyublog.github.io/posts/kubernetes-install/</link>
       <pubDate>Tue, 24 Jul 2018 21:05:32 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/kubernetes-install/</guid>
+      <guid>https://yorkyublog.github.io/posts/kubernetes-install/</guid>
       <description>全手工从0到1搭建一个kubernete集群，使用版本v1.11.0完成 项目介绍 该文档描述了全手工从0到1搭建一个kubernete集群，使</description>
     </item>
     
